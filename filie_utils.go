@@ -9,6 +9,10 @@ import (
 	"strings"
 )
 
+func Test(){
+	fmt.Println("hello git_lib")
+}
+
 // CheckIfError should be used to naively panics if an error is not nil.
 func CheckIfError(err error) bool {
 	if err == nil {
@@ -28,7 +32,7 @@ func Info(format string, args ...interface{}) {
  * @param destPath		拷贝到的位置: D:/backup/
  */
 func CopyDir(srcPath string, destPath string) error {
-	b, _ := pathExists(destPath)
+	b, _ := PathExists(destPath)
 	if b == false{
 		os.Mkdir(destPath, os.ModePerm)
 	}
@@ -91,7 +95,7 @@ func copyFile(src, dest string) (w int64, err error) {
 	for index, dir := range destSplitPathDirs {
 		if index < len(destSplitPathDirs)-1 {
 			destSplitPath = destSplitPath + dir + "/"
-			b, _ := pathExists(destSplitPath)
+			b, _ := PathExists(destSplitPath)
 			if b == false {
 				//fmt.Println("创建目录:" + destSplitPath)
 				//创建目录
@@ -113,7 +117,7 @@ func copyFile(src, dest string) (w int64, err error) {
 }
 
 //检测文件夹路径时候存在
-func pathExists(path string) (bool, error) {
+func PathExists(path string) (bool, error) {
 	_, err := os.Stat(path)
 	if err == nil {
 		return true, nil
